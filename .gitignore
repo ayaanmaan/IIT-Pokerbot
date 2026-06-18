@@ -1,5 +1,6 @@
 # Python artifacts
 __pycache__/
+pkbot/__pycache__/
 
 # Virtual environments
 venv/
@@ -12,3 +13,12 @@ venv/
 logs/
 *.glog
 *.plog
+
+# Misc
+mybot2.py
+mybot4.py
+mybot10.py
+mybot23.py
+mybot26.py
+mybot28.py
+mybot29.py
