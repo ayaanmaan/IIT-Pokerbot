@@ -93,7 +93,6 @@ class PokerLogParser:
             print(f"  Mean Bid Amount:  {stats['Mean Auction Bid']:.2f}")
             print(f"  Bid Variance:     {stats['Bid Variance']:.2f}")
 
-# === How to use it ===
 if __name__ == "__main__":
     # Assuming your log file is saved as 'game_log.txt' in the same directory
     try:
