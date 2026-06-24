@@ -94,7 +94,6 @@ class PokerLogParser:
             print(f"  Bid Variance:     {stats['Bid Variance']:.2f}")
 
 if __name__ == "__main__":
-    # Assuming your log file is saved as 'game_log.txt' in the same directory
     try:
         locstr = "logs\\sgdg_1\\ff25ffa5-e567-4bca-b7c3-f2609c258abb.glog"
         parser = PokerLogParser(locstr)
