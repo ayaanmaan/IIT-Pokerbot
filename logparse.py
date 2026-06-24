@@ -4,13 +4,12 @@ import statistics
 class PokerLogParser:
     def __init__(self, file_path):
         self.file_path = file_path
-        self.bot_payoffs = {}  # Tracks all round-by-round chip changes
-        self.bot_bids = {}     # Tracks all auction bids
-        self.auction_wins = {} # Tracks how many auctions each bot won
+        self.bot_payoffs = {}  # all round-by-round chip changes
+        self.bot_bids = {}     # all auction bids
+        self.auction_wins = {} # auctions each bot won
         self.rounds_played = 0
 
     def parse(self):
-        # Regex patterns to catch the essential log events
         round_pattern = re.compile(r'^Round #(\d+)')
         award_pattern = re.compile(r'^(\w+) awarded (-?\d+)')
         bid_pattern = re.compile(r'^(\w+) bids (\d+)')
@@ -20,11 +19,11 @@ class PokerLogParser:
             for line in file:
                 line = line.strip()
                 
-                # Count total rounds
+                # total rounds
                 if round_pattern.match(line):
                     self.rounds_played += 1
 
-                # Capture Payoffs (Bankroll changes)
+                # bankroll changes
                 award_match = award_pattern.match(line)
                 if award_match:
                     bot, amount = award_match.groups()
@@ -33,7 +32,6 @@ class PokerLogParser:
                         self.bot_payoffs[bot] = []
                     self.bot_payoffs[bot].append(amount)
                     
-                # Capture Auction Bids
                 bid_match = bid_pattern.match(line)
                 if bid_match:
                     bot, amount = bid_match.groups()
@@ -42,7 +40,6 @@ class PokerLogParser:
                         self.bot_bids[bot] = []
                     self.bot_bids[bot].append(amount)
 
-                # Capture Auction Wins
                 auction_win_match = auction_win_pattern.match(line)
                 if auction_win_match:
                     bot = auction_win_match.group(1)
@@ -94,8 +91,10 @@ class PokerLogParser:
             print(f"  Bid Variance:     {stats['Bid Variance']:.2f}")
 
 if __name__ == "__main__":
+    opponent = ""
+    game_id = ""
     try:
-        locstr = "logs\\sgdg_1\\ff25ffa5-e567-4bca-b7c3-f2609c258abb.glog"
+        locstr = f"logs\\{opponent}\\{game_id}.glog"
         parser = PokerLogParser(locstr)
         parser.generate_report()
     except FileNotFoundError:
